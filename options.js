@@ -1,6 +1,7 @@
 // Saves options to chrome.storage
 function save_options() {
-  var folderName = document.getElementById('folderName').value;
+  var sfn = document.getElementById('selectFolderName');
+  var folderName = sfn.options[sfn.selectedIndex].value;
   console.log("folername "+folderName);
   chrome.storage.sync.set({
     name: folderName,
@@ -38,7 +39,7 @@ function restore_options() {
 				
 				var el = document.createElement("option");
 				el.textContent = opt.title;
-				el.value = opt;
+				el.value = opt.title;
 				select.appendChild(el);
 				
 			} 
