@@ -15,12 +15,33 @@ function save_options() {
   });
 }
 
-// stored in chrome.storage.
+// get folder stored in chrome.storage.
+// populates the folder options
 function restore_options() {
   chrome.storage.sync.get( "name", function(items) {
 	  
 	console.log("item "+items.name);
     document.getElementById('currentFolder').value = items.name;
+	
+	var select = document.getElementById("selectFolderName");
+	var options  = chrome.bookmarks.getTree(function(bookmarkTreeNodes) {console.log(bookmarkTreeNodes);});
+
+	console.log(options);
+	
+	
+	
+	
+	
+	
+	for(var i = 0; i < options.length; i++) {
+		var opt = options[i];
+		var el = document.createElement("option");
+		el.textContent = opt;
+		el.value = opt;
+		select.appendChild(el);
+	}
+	
+	
   });
 }
 document.addEventListener('DOMContentLoaded', restore_options);
