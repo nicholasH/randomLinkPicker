@@ -13,18 +13,18 @@ chrome.bookmarks.getTree(traverseBookmarks);
 function traverseBookmarks(bookmarkTreeNodes) {
 	
 	chrome.storage.sync.get("name", function(n){
-			    for(var i=0;i<bookmarkTreeNodes.length;i++) {
+		for(var i=0;i<bookmarkTreeNodes.length;i++) {
         //console.log(bookmarkTreeNodes[i].title, bookmarkTreeNodes[i].url ? bookmarkTreeNodes[i].url : "[Folder]");
 		
 	
-		console.log("test"+n)
+			console.log("test"+n)
 			if(bookmarkTreeNodes[i].title == n.name){
-			console.log("found it"+i);
-			getRandomLink(bookmarkTreeNodes[i].children);
-		}
-        if(bookmarkTreeNodes[i].children) {
-            traverseBookmarks(bookmarkTreeNodes[i].children);
-        } 
+				console.log("found it"+i);
+				getRandomLink(bookmarkTreeNodes[i].children);
+			}
+			if(bookmarkTreeNodes[i].children) {
+				traverseBookmarks(bookmarkTreeNodes[i].children);
+			} 
 
     }	
 			

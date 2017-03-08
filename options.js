@@ -16,32 +16,37 @@ function save_options() {
 }
 
 // get folder stored in chrome.storage.
-// populates the folder options
+// populates the folder options from folders in the bookmark bar 
+// todo make find all folders 
 function restore_options() {
   chrome.storage.sync.get( "name", function(items) {
 	  
 	console.log("item "+items.name);
     document.getElementById('currentFolder').value = items.name;
 	
-	var select = document.getElementById("selectFolderName");
-	var options  = chrome.bookmarks.getTree(function(bookmarkTreeNodes) {console.log(bookmarkTreeNodes);});
+	
+	chrome.bookmarks.getTree(function(bookmarkTreeNodes) {
+		var select = document.getElementById("selectFolderName");
+		var op = bookmarkTreeNodes[0].children;
+		console.log(op);
+		var op2 = op[0].children;
+		console.log(op2);
+				
+		for(var i = 0; i < op2.length; i++) {
+			var opt = op2[i];
+			if(op2[i].children) {
+				
+				var el = document.createElement("option");
+				el.textContent = opt.title;
+				el.value = opt;
+				select.appendChild(el);
+				
+			} 
 
-	console.log(options);
-	
-	
-	
-	
-	
-	
-	for(var i = 0; i < options.length; i++) {
-		var opt = options[i];
-		var el = document.createElement("option");
-		el.textContent = opt;
-		el.value = opt;
-		select.appendChild(el);
-	}
-	
-	
+		}
+		
+	});
+
   });
 }
 document.addEventListener('DOMContentLoaded', restore_options);
