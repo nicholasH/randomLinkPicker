@@ -21,6 +21,7 @@ function traverseBookmarks(bookmarkTreeNodes) {
 			if(bookmarkTreeNodes[i].title == n.name){
 				console.log("found it"+i);
 				getRandomLink(bookmarkTreeNodes[i].children);
+				return;
 			}
 			if(bookmarkTreeNodes[i].children) {
 				traverseBookmarks(bookmarkTreeNodes[i].children);
