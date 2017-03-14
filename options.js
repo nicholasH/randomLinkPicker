@@ -2,10 +2,10 @@
 function save_options() {
   var sfn = document.getElementById('selectFolderName');
   var folderName = sfn.options[sfn.selectedIndex].value;
+  var folderNameVal = sfn.options[sfn.selectedIndex].value;
+  
   console.log("folername "+folderName);
-  chrome.storage.sync.set({
-    name: folderName,
-  }, function() {
+  chrome.storage.sync.set({name: folderName,}, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
     status.textContent = 'Options saved.';

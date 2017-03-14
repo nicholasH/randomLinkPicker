@@ -17,9 +17,9 @@ function traverseBookmarks(bookmarkTreeNodes) {
         //console.log(bookmarkTreeNodes[i].title, bookmarkTreeNodes[i].url ? bookmarkTreeNodes[i].url : "[Folder]");
 		
 	
-			console.log("test"+n)
+			console.log("test "+n.name)
 			if(bookmarkTreeNodes[i].title == n.name){
-				console.log("found it"+i);
+				console.log("found it s"+i);
 				getRandomLink(bookmarkTreeNodes[i].children);
 				return;
 			}
