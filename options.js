@@ -28,24 +28,20 @@ async function restore_options() {
 	var select = document.getElementById("selectFolderName");
 	
 	getArray().then(v => {
-		for(var i = 0;i < v.length;i++){
-			var el = document.createElement("option");
-			el.textContent =v[i].title;
-			el.value = v[i].title;
-			select.appendChild(el);
-			
-			
-			
+		for(var i = 0;i <= v.length;i++){
+			if(v[i].id !="0"){
+				var el = document.createElement("option");
+				el.textContent =v[i].title;
+				el.value = v[i].title;
+				select.appendChild(el);
+			}
+
 		}
 	});
-	
-
-
   });
 }
 document.addEventListener('DOMContentLoaded', restore_options);
-document.getElementById('save').addEventListener('click',
-    save_options);
+document.getElementById('save').addEventListener('click',save_options);
 	
 	
 function getFolders(x) {
@@ -54,22 +50,16 @@ function getFolders(x) {
 	  
 	  chrome.bookmarks.getTree(function traverseBookmarks(bookmarkTreeNodes) {
 		  
-		  	for(var i=0;i<bookmarkTreeNodes.length;i++) {
+		for(var i=0;i<bookmarkTreeNodes.length;i++) {
 		
-		
-		if(bookmarkTreeNodes[i].children) {
-			traverseBookmarks(bookmarkTreeNodes[i].children);
-			folderArray.push(bookmarkTreeNodes[i]);
+			if(bookmarkTreeNodes[i].children) {
+				traverseBookmarks(bookmarkTreeNodes[i].children);
+				folderArray.push(bookmarkTreeNodes[i]);
 		} 
 		resolve(folderArray);
 			
 	} 
-	  });
-	  
-	  
-	  
-	  
-    
+	  });  
   });
 }
 
